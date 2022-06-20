@@ -29,7 +29,7 @@ def import_images(image_dir, database_path, camera_mode, image_list=None):
         raise IOError(f'No images found in {image_dir}.')
     with pycolmap.ostream():
         pycolmap.import_images(database_path, image_dir, camera_mode,
-                               image_list=image_list or [])
+                               image_list=image_list or [], camera_model="PINHOLE")
 
 
 def get_image_ids(database_path):
@@ -76,7 +76,7 @@ def run_reconstruction(sfm_dir, database_path, image_dir, verbose=False):
 
 
 def main(sfm_dir, image_dir, pairs, features, matches,
-         camera_mode=pycolmap.CameraMode.AUTO, verbose=False,
+         camera_mode=pycolmap.CameraMode.SINGLE, verbose=False,
          skip_geometric_verification=False, min_match_score=None,
          image_list: Optional[List[str]] = None):
 
